@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CW Máquinas — Assistência Técnica</title>
+    <meta name="description"
+        content="CW Máquinas — Assistência técnica e manutenção de máquinas de lavar. Rápido, seguro e com garantia." />
+    <style>
+        /* ---------------------------------
+       CSS RESET (minimal)
+       ---------------------------------*/
+        :root {
+            --bg: #0b0b0b;
+            --card: #0f0f0f;
+            --muted: #a9a9a9;
+            --accent: #86ff3b;
+            /* verde vibrante compatível com logo */
+            --accent-dark: #58c32a;
+            --glass: rgba(255, 255, 255, 0.04);
+            --maxw: 1200px;
+            --radius: 14px;
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            background: linear-gradient(180deg, #070707 0%, #0b0b0b 100%);
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.4;
+        }
+
+        /* ---------- layout ---------- */
+        .container {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 28px
+        }
+
+        header {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(11, 11, 11, 0.85), rgba(11, 11, 11, 0.6));
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 12px 20px
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .brand img {
+            height: 54px;
+            width: auto;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6)
+        }
+
+        .brand h1 {
+            font-size: 20px;
+            letter-spacing: 1px;
+            color: var(--accent);
+            font-weight: 700
+        }
+
+        nav ul {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            list-style: none
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 10px;
+            border-radius: 8px
+        }
+
+        nav a:hover {
+            background: var(--glass);
+            color: var(--accent)
+        }
+
+        .cta {
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            color: #061304;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            box-shadow: 0 8px 30px rgba(134, 255, 59, 0.08)
+        }
+
+        /* ---------- hero ---------- */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 520px;
+            gap: 40px;
+            align-items: center;
+            padding-top: 110px;
+            padding-bottom: 60px
+        }
+
+        .hero .text h2 {
+            font-size: 46px;
+            line-height: 1.03;
+            letter-spacing: -1px;
+            color: #e8ffe3
+        }
+
+        .accent-line {
+            display: inline-block;
+            height: 8px;
+            width: 80px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            border-radius: 8px;
+            margin-bottom: 18px
+        }
+
+        .hero p {
+            color: var(--muted);
+            margin-top: 10px;
+            font-size: 16px;
+            max-width: 68%
+        }
+
+        .hero .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            border: 0;
+            cursor: pointer
+        }
+
+        .btn-light {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            color: #061304
+        }
+
+        /* hero visual card */
+        .card-visual {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden
+        }
+
+        .machine-illustration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px
+        }
+
+        .machine-illustration svg {
+            width: 100%;
+            max-width: 420px;
+            height: auto
+        }
+
+        .badge {
+            position: absolute;
+            left: 18px;
+            top: 18px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        /* ---------- features / services ---------- */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin: 40px 0
+        }
+
+        .service {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: transform .45s cubic-bezier(.2, .9, .2, 1), box-shadow .45s
+        }
+
+        .service:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6)
+        }
+
+        .service .icon {
+            font-size: 22px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px;
+            border-radius: 10px;
+            display: inline-block
+        }
+
+        .service h3 {
+            color: #ffffff
+        }
+
+        .service p {
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        /* ---------- counters ---------- */
+        .counters {
+            display: flex;
+            gap: 18px;
+            margin: 18px 0
+        }
+
+        .counter {
+            flex: 1;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center
+        }
+
+        .counter strong {
+            display: block;
+            font-size: 28px;
+            color: var(--accent);
+            font-weight: 800
+        }
+
+        .counter span {
+            color: var(--muted);
+            display: block;
+            margin-top: 6px
+        }
+
+        /* ---------- gallery ---------- */
+        .gallery {
+            margin: 28px 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform .35s
+        }
+
+        .gallery img:hover {
+            transform: scale(1.04)
+        }
+
+        /* ---------- testimonials ---------- */
+        .testimonials {
+            display: flex;
+            gap: 12px;
+            overflow: hidden
+        }
+
+        .testimonial {
+            min-width: 300px;
+            background: var(--card);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        .testimonial p {
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        /* ---------- contact ---------- */
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 18px;
+            margin: 30px 0;
+            padding: 18px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
+            border: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        label {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        input,
+        textarea,
+        select {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 12px;
+            border-radius: 10px;
+            color: #099801;
+            resize: vertical
+        }
+
+        textarea {
+            min-height: 140px
+        }
+
+        /* modal image viewer */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s
+        }
+
+        .modal.open {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 8px
+        }
+
+        /* footer */
+        footer {
+            padding: 28px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            margin-top: 40px
+        }
+
+        footer .foot-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .socials {
+            display: flex;
+            gap: 12px
+        }
+
+        /* small screens */
+        @media (max-width:980px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .services {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .contact {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media (max-width:560px) {
+            nav ul {
+                display: none
+            }
+
+            .container {
+                padding: 16px
+            }
+
+            .hero .text h2 {
+                font-size: 32px
+            }
+
+            .brand img {
+                height: 44px
+            }
+        }
+
+        /* little reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: all .7s cubic-bezier(.2, .9, .2, 1)
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: none
+        }
+
+        /* subtle floating decoration */
+        .float-blob {
+            position: absolute;
+            right: -120px;
+            top: -100px;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle at 20% 20%, rgba(134, 255, 59, 0.12), rgba(134, 255, 59, 0.02));
+            filter: blur(36px);
+            transform: rotate(22deg);
+            pointer-events: none
+        }
+
+        /* ===== Breakpoints ===== */
+
+        #hero h1 {
+            font-size: 2.2rem;
+        }
+
+        #hero p {
+            font-size: 1rem;
+        }
+
+        section {
+            padding: 100px 5%;
+        }
+
+        .service {
+            max-width: 100%;
+        }
+
+
+        /* 📲 Tablets (481px - 768px) */
+        @media (min-width: 481px) and (max-width: 768px) {
+            header {
+                padding: 15px 7%;
+            }
+
+            #hero {
+                flex-wrap: wrap;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            .service {
+                max-width: 45%;
+            }
+        }
+
+
+        /* 💻 Notebooks (769px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            header {
+                padding: 20px 8%;
+            }
+
+            #hero h1 {
+                font-size: 2.7rem;
+            }
+
+            #hero img {
+                max-width: 500px;
+            }
+
+            .service {
+                max-width: 30%;
+            }
+        }
+
+
+        /* 🖥️ Desktop (acima de 1024px) */
+        @media (min-width: 1025px) {
+            #hero h1 {
+                font-size: 3rem;
+            }
+
+            #hero img {
+                max-width: 550px;
+            }
+        }
+    </style>
+
+    
+</head>
+
+<body>
+    <header>
+        <div class="container nav">
+            <div class="brand">
+                <!-- Replace ./assets/logo.jpg with the file you uploaded (recommended: 400x400) -->
+                <img src="./img/img 1 logo.jpg" alt="CW Máquinas Logo" />
+                <div>
+                    <h1>CW Máquinas</h1>
+                    <div style="font-size:12px;color:var(--muted);margin-top:2px">Assistência Técnica • Conserto e
+                        Manutenção</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="https://w.app/cwmaquinas">Contato</a></li>
+                </ul>
+            </nav>
+            <div>
+                <button class="cta" id="agendarBtn">Agendar Serviço</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="text">
+                <span class="accent-line reveal" style="--delay:0.05s"></span>
+                <h2 class="reveal" style="--delay:0.1s">Assistência técnica rápida e confiável para sua máquina de lavar
+                </h2>
+                <p class="reveal" style="--delay:0.15s">Diagnóstico preciso, peças originais e garantia. Atendimento
+                    residência e oficina. Técnicos especializados prontos para devolver a sua tranquilidade.</p>
+
+                <div class="actions reveal" style="--delay:0.2s">
+                    <button class="btn btn-primary"
+                        onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Solicitar
+                        Orçamento</button>
+                    <button class="btn btn-light"
+                        onclick="document.getElementById('galeria').scrollIntoView({behavior:'smooth'})">Ver
+                        Galeria</button>
+                </div>
+
+                <div class="counters reveal" style="margin-top:24px;--delay:0.25s">
+                    <div class="counter">
+                        <strong data-target="1284">0</strong>
+                        <span>Serviços Realizados</span>
+                    </div>
+                    <div class="counter">
+                        <strong data-target="12">0</strong>
+                        <span>Anos de Mercado</span>
+                    </div>
+                    <div class="counter">
+                        <strong data-target="98">0</strong>
+                        <span>% Satisfação</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-visual reveal" style="--delay:0.12s">
+                <div class="badge">Atendimento rápido • Garantia</div>
+                <div class="machine-illustration">
+                    <!-- Inline svg illustration of a technician and washing machine. You can replace with a real photo in ./assets/tech.jpg -->
+                    <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" role="img"
+                        aria-label="Ilustração técnica">
+                        <defs>
+                            <linearGradient id="g" x1="0" x2="1">
+                                <stop offset="0" stop-color="#9fff4a" />
+                                <stop offset="1" stop-color="#58c32a" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" rx="18" fill="url(#bg)" />
+                        <!-- washing machine body -->
+                        <g transform="translate(70,40)">
+                            <rect x="40" y="40" rx="18" ry="18" width="300" height="330" fill="#0b0b0b"
+                                stroke="rgba(255,255,255,0.04)" />
+                            <circle cx="190" cy="200" r="90" fill="#071014" stroke="rgba(255,255,255,0.03)" />
+                            <circle cx="190" cy="200" r="54" fill="url(#g)" opacity="0.14" />
+                            <rect x="96" y="102" width="188" height="6" rx="3" fill="rgba(255,255,255,0.02)" />
+                            <rect x="70" y="20" width="90" height="16" rx="8" fill="#0b0b0b" />
+                        </g>
+                        <!-- simplified technician -->
+                        <g transform="translate(400,80) scale(0.9)">
+                            <circle cx="64" cy="48" r="34" fill="#f2e9e0" />
+                            <rect x="40" y="88" rx="18" width="70" height="120" fill="#112" />
+                            <rect x="30" y="100" width="90" height="24" rx="12" fill="url(#g)" opacity="0.95" />
+                            <rect x="20" y="132" width="30" height="80" rx="14" fill="#0d0d0d" />
+                            <rect x="110" y="132" width="30" height="80" rx="14" fill="#0d0d0d" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="float-blob"></div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="servicos">
+            <h2 class="reveal">Nossos Serviços</h2>
+            <p class="reveal" style="color:var(--muted);margin-top:6px;max-width:780px">Prestamos manutenção,
+                instalação, troca de peças e revisões preventivas para máquinas de lavar e eletrodomésticos. Atendemos
+                residência e empresas.</p>
+
+            <div class="services">
+                <div class="service reveal">
+                    <div class="icon">🔧</div>
+                    <h3>Conserto Rápido</h3>
+                    <p>Diagnóstico em até 24h com solução rápida e peças de qualidade.</p>
+                </div>
+                <div class="service reveal">
+                    <div class="icon">🚚</div>
+                    <h3>Retirada e Entrega</h3>
+                    <p>Oficina equipada + opção de retirada e entrega com seguro.</p>
+                </div>
+                <div class="service reveal">
+                    <div class="icon">🧰</div>
+                    <h3>Peças Originais</h3>
+                    <p>Fornecemos e instalamos peças originais com garantia mínima de 3 meses.</p>
+                </div>
+                <div class="service reveal">
+                    <div class="icon">📞</div>
+                    <h3>Suporte 24/7</h3>
+                    <p>Atendimento via WhatsApp para agendamento e suporte técnico.</p>
+                </div>
+                <div class="service reveal">
+                    <div class="icon">🏠</div>
+                    <h3>Serviço Residencial</h3>
+                    <p>Técnicos qualificados vão até sua casa com equipamentos completos.</p>
+                </div>
+                <div class="service reveal">
+                    <div class="icon">🔍</div>
+                    <h3>Revisão Preventiva</h3>
+                    <p>Evite problemas futuros com uma revisão anual preventiva.</p>
+                </div>
+            </div>
+
+            <div class="reveal counters" style="margin-top:18px">
+                <div class="counter">
+                    <strong data-target="325">0</strong>
+                    <span>Atendimentos este mês</span>
+                </div>
+                <div class="counter">
+                    <strong data-target="72">0</strong>
+                    <span>Clientes fiéis</span>
+                </div>
+                <div class="counter">
+                    <strong data-target="1">0</strong>
+                    <span>Sucursais</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section id="galeria">
+            <h2 class="reveal">Galeria</h2>
+            <p class="reveal" style="color:var(--muted);margin-top:6px;max-width:780px">Fotos de serviços realizados.
+                Substitua as imagens em <code>./assets/gallery-*.jpg</code> com as suas fotos reais.</p>
+            <div class="gallery reveal">
+                <!-- Replace these placeholders with your real photos ./assets/gallery-1.jpg etc -->
+                <img src="./assets/gallery-1.jpg" alt="Serviço 1" data-full="./assets/gallery-1.jpg"
+                    onerror="this.style.opacity=0.2" />
+                <img src="./assets/gallery-2.jpg" alt="Serviço 2" data-full="./assets/gallery-2.jpg"
+                    onerror="this.style.opacity=0.2" />
+                <img src="./assets/gallery-3.jpg" alt="Serviço 3" data-full="./assets/gallery-3.jpg"
+                    onerror="this.style.opacity=0.2" />
+                <img src="./assets/gallery-4.jpg" alt="Serviço 4" data-full="./assets/gallery-4.jpg"
+                    onerror="this.style.opacity=0.2" />
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="depoimentos">
+            <h2 class="reveal">Depoimentos</h2>
+            <div class="testimonials reveal" style="margin-top:12px">
+                <div class="testimonial">
+                    <strong>Mariana R.</strong>
+                    <p>Serviço rápido e com excelente preço. Meu aparelho voltou a funcionar como novo. Recomendo!</p>
+                </div>
+                <div class="testimonial">
+                    <strong>João P.</strong>
+                    <p>Equipe profissional e atendimento humano. Resolveram o problema na primeira visita.</p>
+                </div>
+                <div class="testimonial">
+                    <strong>Ana L.</strong>
+                    <p>Peças originais e garantia. Muito satisfeita com o serviço.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contato" class="contact reveal">
+            <div>
+                <h2>Fale conosco</h2>
+                <p style="color:var(--muted);margin-top:6px">Preencha o formulário e nossa equipe entrará em contato em
+                    até 24 horas.</p>
+                <form id="contactForm">
+                    <label>Nome</label>
+                    <input type="text" name="name" required placeholder="Seu nome" />
+                    <label>Telefone / WhatsApp</label>
+                    <input type="text" name="phone" required placeholder="(XX) XXXXX-XXXX" />
+                    <label>Serviço</label>
+                    <select name="service">
+                        <option>Conserto</option>
+                        <option>Instalação</option>
+                        <option>Revisão</option>
+                        <option>Outros</option>
+                    </select>
+                    <label>Mensagem</label>
+                    <textarea name="message" placeholder="Descreva o problema ou solicitação"></textarea>
+                    <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="button" class="btn btn-light"
+                            onclick="window.location.href='tel:+55 (84) 99103-0236'">Ligar Agora</button>
+                    </div>
+                </form>
+            </div>
+
+            <aside style="padding:18px">
+                <h3>Onde nos encontrar</h3>
+                <p style="color:var(--muted);margin-top:6px">Rua Isabel Gadelha, 81 • Cohab • Goianinha</p>
+                <p style="color:var(--muted);margin-top:6px">Seg-Sex: 8h - 17h • Sáb: 9h - 14h</p>
+                <div style="margin-top:12px">
+                    <strong>Número:</strong>
+                    <div style="margin-top:6px">(84) 99103-0236 • <span
+                            style="font-weight:700;color:var(--accent)">WhatsApp</span></div>
+                </div>
+
+                <div style="margin-top:18px">
+                    <h4>Garanta 10% OFF</h4>
+                    <p style="color:var(--muted);margin-top:6px">Assine nossa lista e receba um cupom para primeiro
+                        serviço.</p>
+                    <div style="display:flex;gap:8px;margin-top:8px">
+                        <input type="email" id="leadEmail" placeholder="seu@email.com" style="flex:1" />
+                        <button class="btn btn-primary" id="leadBtn">Receber</button>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <footer>
+            <div class="foot-row">
+                <div style="display:flex;gap:12px;align-items:center">
+                    <img src="./assets/logo.jpg" alt="logo" style="height:44px;border-radius:8px" />
+                    <div>
+                        <div style="font-weight:700">CW Máquinas</div>
+                        <div style="font-size:13px;color:var(--muted)">Assistência Técnica • Conserto e Manutenção</div>
+                    </div>
+                </div>
+                <div class="socials">
+                    <a
+                        href="https://www.instagram.com/cw.maquinasassistencia?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a>
+                    <a href="https://w.app/cwmaquinas">WhatsApp</a>
+                    <a href="#">Facebook</a>
+                </div>
+            </div>
+            <div style="margin-top:18px;color:var(--muted);font-size:13px">© CW Máquinas — Todos os direitos reservados
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- modal viewer -->
+    <div id="modal" class="modal" role="dialog" aria-hidden="true">
+        <img src="" alt="Visualização" />
+    </div>
+
+    <script>
+        // ---------- smooth reveal with IntersectionObserver ----------
+        const revealEls = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(ent => {
+                if (ent.isIntersecting) {
+                    ent.target.classList.add('show');
+                    io.unobserve(ent.target);
+                }
+            })
+        }, { threshold: 0.12 });
+        revealEls.forEach(el => io.observe(el));
+
+        // ---------- counters animation ----------
+        const counters = document.querySelectorAll('[data-target]');
+        counters.forEach(counter => {
+            const update = () => {
+                const target = +counter.dataset.target;
+                const current = +counter.innerText.replace(/\D/g, '') || 0;
+                const increment = Math.ceil(target / 120);
+                if (current < target) {
+                    counter.innerText = current + increment;
+                    setTimeout(update, 18);
+                } else counter.innerText = target;
+            }
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) { update(); obs.disconnect(); } })
+            }, { threshold: 0.6 });
+            obs.observe(counter);
+        });
+
+        // ---------- gallery modal ----------
+        const modal = document.getElementById('modal');
+        const modalImg = modal.querySelector('img');
+        document.querySelectorAll('.gallery img').forEach(img => {
+            img.addEventListener('click', () => {
+                modalImg.src = img.dataset.full || img.src;
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden', 'false');
+            })
+        });
+        modal.addEventListener('click', (e) => { if (e.target === modal || e.target === modalImg) { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); } })
+
+        // ---------- contact form simple handler ----------
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // simulate sending
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.disabled = true; btn.innerText = 'Enviando...';
+            setTimeout(() => {
+                btn.disabled = false; btn.innerText = 'Enviar';
+                alert('Mensagem enviada! Entraremos em contato pelo número informado.');
+                e.target.reset();
+            }, 900);
+        });
+
+        // ---------- lead capture ----------
+        document.getElementById('leadBtn').addEventListener('click', () => {
+            const email = document.getElementById('leadEmail').value.trim();
+            if (!email || !email.includes('@')) { alert('Informe um e-mail válido'); return }
+            document.getElementById('leadBtn').innerText = 'Enviado';
+            setTimeout(() => { document.getElementById('leadBtn').innerText = 'Receber'; document.getElementById('leadEmail').value = ''; alert('Obrigado! Verifique seu e-mail para o cupom.'); }, 900);
+        });
+
+        // ---------- CTA "Agendar" opens contact ----------
+        document.getElementById('agendarBtn').addEventListener('click', () => { document.getElementById('contato').scrollIntoView({ behavior: 'smooth' }); });
+
+        // ---------- small polish: animate hero svg gently ----------
+        const float = document.querySelector('.float-blob');
+        let t = 0; setInterval(() => { t += 0.02; if (float) float.style.transform = `rotate(${22 + Math.sin(t) * 6}deg) translateY(${Math.sin(t * 0.7) * 6}px)` }, 45);
+
+        // ---------- accessibility: keyboard close modal ----------
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal.classList.remove('open'); });
+
+        // ---------- progressive image loading fallback: if asset missing, replace with generated svg data url ----------
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('error', () => {
+                // simple generated placeholder
+                const svg = encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect width='100%' height='100%' fill='#0b0b0b'/><text x='50%' y='50%' fill='%2386ff3b' font-size='36' font-family='Arial' text-anchor='middle' dominant-baseline='middle'>Imagem ausente</text></svg>`);
+                img.src = `data:image/svg+xml;charset=utf-8,${svg}`;
+            })
+        })
+    </script>
+</body>
+
+</html>
