@@ -742,6 +742,7 @@
                 <p style="color:var(--muted);margin-top:6px">Preencha o formulário e nossa equipe entrará em contato em
                     até 24 horas.</p>
 
+                <!-- ===== FORMULÁRIO COM LIGAÇÃO DIRETA VIA HREF ===== -->
                 <style>
                     .form-section {
                         background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
@@ -791,7 +792,8 @@
                         outline: none;
                     }
 
-                    .form-container button {
+                    .whatsapp-button {
+                        display: inline-block;
                         background: linear-gradient(90deg, #00d4ff, #0077ff);
                         color: #fff;
                         border: none;
@@ -802,9 +804,10 @@
                         letter-spacing: 1px;
                         cursor: pointer;
                         transition: all 0.3s ease;
+                        text-decoration: none;
                     }
 
-                    .form-container button:hover {
+                    .whatsapp-button:hover {
                         transform: scale(1.05);
                         box-shadow: 0 0 15px #00d4ff;
                     }
@@ -813,15 +816,6 @@
                         .form-section {
                             padding: 40px 15px;
                         }
-
-                        .form-container {
-                            width: 100%;
-                        }
-
-                        .form-container input,
-                        .form-container textarea {
-                            font-size: 0.95em;
-                        }
                     }
 
                     @media (max-width: 480px) {
@@ -829,7 +823,7 @@
                             font-size: 1.5em;
                         }
 
-                        .form-container button {
+                        .whatsapp-button {
                             font-size: 1em;
                             padding: 12px;
                         }
@@ -838,13 +832,17 @@
 
                 <section class="form-section" id="contato">
                     <h2>Fale Conosco</h2>
+
                     <form id="whatsappForm" class="form-container">
-                        <input type="text" id="name" name="name" placeholder="Seu Nome" required />
-                        <input type="email" id="email" name="email" placeholder="Seu E-mail" required />
-                        <textarea id="message" name="message" rows="4" placeholder="Sua Mensagem" required></textarea>
-                        <button type="submit">Enviar Mensagem</button>
+                        <input type="text" id="name" placeholder="Seu Nome" required />
+                        <input type="email" id="email" placeholder="Seu E-mail" required />
+                        <textarea id="message" rows="4" placeholder="Sua Mensagem" required></textarea>
+
+                        <!-- Botão WhatsApp -->
+                        <a id="whatsappLink" class="whatsapp-button" href="https://w.app/cwmaquinas" target="_blank">Enviar Mensagem</a>
                     </form>
                 </section>
+
             </div>
 
             <aside style="padding:18px">
@@ -940,19 +938,6 @@
         });
         modal.addEventListener('click', (e) => { if (e.target === modal || e.target === modalImg) { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); } })
 
-        // ---------- contact form simple handler ----------
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            // simulate sending
-            const btn = e.target.querySelector('button[type="submit"]');
-            btn.disabled = true; btn.innerText = 'Enviando...';
-            setTimeout(() => {
-                btn.disabled = false; btn.innerText = 'Enviar';
-                alert('Mensagem enviada! Entraremos em contato pelo número informado.');
-                e.target.reset();
-            }, 900);
-        });
-
         // ---------- lead capture ----------
         document.getElementById('leadBtn').addEventListener('click', () => {
             const email = document.getElementById('leadEmail').value.trim();
@@ -980,19 +965,24 @@
             })
         })
 
-        document.getElementById("whatsappForm").addEventListener("submit", function (e) {
+        const link = document.getElementById("whatsappLink");
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const messageInput = document.getElementById("message");
+
+        const telefone = "5584991030236"; // 👉 coloca o número do WhatsApp da CW Máquinas
+
+        link.addEventListener("click", function (e) {
             e.preventDefault();
 
-            const nome = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const mensagem = document.getElementById("message").value.trim();
+            const nome = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const mensagem = messageInput.value.trim();
 
             if (!nome || !email || !mensagem) {
-                alert("Por favor, preencha todos os campos antes de enviar.");
+                alert("Preencha todos os campos antes de enviar!");
                 return;
             }
-
-            const telefone = "5584991030236"; // 👉 Coloca aqui o número da CW Máquinas (55 + DDD + número)
 
             const texto = `👋 Olá! Me chamo ${nome}.
             📧 E-mail: ${email}
@@ -1000,15 +990,11 @@
 
             Quero atendimento da *CW Máquinas - Assistência Técnica*.`;
 
-            const url = `https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(texto)}`;
-
-            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-            if (isMobile) {
-                window.location.href = url; // abre app
-            } else {
-                window.open(url, "_blank"); // fallback pra desktop
-            }
+            const url = `https://wa.me/${telefone}?text=${encodeURIComponent(texto)}`;
+            link.setAttribute("href", url);
+            window.open(url, "_blank");
         });
+
         //------------API---------------
 
 
