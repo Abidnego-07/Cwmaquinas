@@ -248,7 +248,7 @@
         }
 
         .service h3 {
-            color: #ffffff;
+            color: #111;
         }
 
         .service p {
@@ -755,7 +755,7 @@
 
                     .form-section h2 {
                         font-size: 2em;
-                        color: #00d4ff;
+                        color: #86ff3b;
                         margin-bottom: 30px;
                         text-transform: uppercase;
                         letter-spacing: 2px;
@@ -787,18 +787,18 @@
 
                     .form-container input:focus,
                     .form-container textarea:focus {
-                        border-color: #00d4ff;
-                        box-shadow: 0 0 10px #00d4ff;
+                        border-color: #86ff3b;
+                        box-shadow: 0 0 10px #86ff3b;
                         outline: none;
                     }
 
                     .whatsapp-button {
                         display: inline-block;
-                        background: linear-gradient(90deg, #00d4ff, #0077ff);
+                        background: linear-gradient(90deg, #1bc907, #039c27);
                         color: #fff;
                         border: none;
-                        padding: 15px;
-                        border-radius: 8px;
+                        padding: 20px;
+                        border-radius: 12px;
                         font-size: 1.1em;
                         text-transform: uppercase;
                         letter-spacing: 1px;
@@ -809,7 +809,7 @@
 
                     .whatsapp-button:hover {
                         transform: scale(1.05);
-                        box-shadow: 0 0 15px #00d4ff;
+                        box-shadow: 0 0 15px #86ff3b;
                     }
 
                     @media (max-width: 768px) {
@@ -835,11 +835,30 @@
 
                     <form id="whatsappForm" class="form-container">
                         <input type="text" id="name" placeholder="Seu Nome" required />
-                        <input type="email" id="email" placeholder="Seu E-mail" required />
+                        <select style=" display: inline-block;
+                        background: linear-gradient(90deg, #111, #333);
+                        color: #fff;
+                        border: none;
+                        padding: 20px;
+                        border-radius: 12px;
+                        font-size: 1.1em;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        text-decoration: none;" name="Equipamento a ser revisado">
+                            <option style="color: #111;">Maquina de lavar</option>
+                            <option style="color: #111;">Micro-ondas</option>
+                            <option style="color: #111;">Ventilador</option>
+                            <option style="color: #111;">Air Fryer</option>
+                            <option style="color: #111;">Forno elétrico</option>
+                            <option style="color: #111;">Outros</option>
+                        </select>
                         <textarea id="message" rows="4" placeholder="Sua Mensagem" required></textarea>
 
                         <!-- Botão WhatsApp -->
-                        <a id="whatsappLink" class="whatsapp-button" href="https://w.app/cwmaquinas" target="_blank">Enviar Mensagem</a>
+                        <a id="whatsappLink" class="whatsapp-button" href="https://w.app/cwmaquinas"
+                            target="_blank">Enviar Mensagem</a>
                     </form>
                 </section>
 
@@ -964,33 +983,38 @@
                 img.src = `data:image/svg+xml;charset=utf-8,${svg}`;
             })
         })
-
         const link = document.getElementById("whatsappLink");
         const nameInput = document.getElementById("name");
-        const emailInput = document.getElementById("email");
+        const emailInput = document.getElementById("email"); // caso queira adicionar novamente depois
         const messageInput = document.getElementById("message");
+        const equipamentoSelect = document.querySelector('select[name="Equipamento a ser revisado"]');
 
-        const telefone = "5584991030236"; // 👉 coloca o número do WhatsApp da CW Máquinas
+        // 🔧 Coloca aqui o número do WhatsApp que vai receber as mensagens:
+        const telefone = "5584991030236"; // Exemplo: (84) 98765-4321 -> 5584987654321
 
         link.addEventListener("click", function (e) {
             e.preventDefault();
 
             const nome = nameInput.value.trim();
-            const email = emailInput.value.trim();
+            const equipamento = equipamentoSelect.value;
             const mensagem = messageInput.value.trim();
 
-            if (!nome || !email || !mensagem) {
+            if (!nome || !mensagem) {
                 alert("Preencha todos os campos antes de enviar!");
                 return;
             }
 
+            // 🔹 Monta o texto bonitinho com que o cliente digitou
             const texto = `👋 Olá! Me chamo ${nome}.
-            📧 E-mail: ${email}
+            🔧 Equipamento a ser revisado: ${equipamento}
             💬 Mensagem: ${mensagem}
 
-            Quero atendimento da *CW Máquinas - Assistência Técnica*.`;
+            Quero atendimento da *CW Máquinas - Assistência Técnica*`;
 
+            // 🔹 Cria o link pro WhatsApp com o texto formatado
             const url = `https://wa.me/${telefone}?text=${encodeURIComponent(texto)}`;
+
+            // 🔹 Abre o WhatsApp com a mensagem pronta
             link.setAttribute("href", url);
             window.open(url, "_blank");
         });
